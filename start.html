@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>熊珊我爱你</title>
+	 <script src="js\jquery-1.8.3.min.js"></script>
+	<script src="js\jsized.snow.min.js"></script>
+	<link rel="stylesheet" href="css\main.css">
+	<script type="text/javascript"> 
+	   //显示autumn文字
+var x = 0;
+var liCount = 0;
+showautumntext = function showautumntext() {
+    $(".textright ul li").eq(x).fadeIn(4000,
+    function() {
+    	console.log(x);
+        x++;
+        if (x != liCount) {
+            showautumntext();
+        } else {
+            golove();
+        }
+    });
+}
+//显示spring图片
+var s = 0;
+var imgCount = 0;
+showspringimg = function showspringimg() {
+    var $simg = $(".childdiv-spring img").eq(s);
+    var $textimg = $("#imgtext");
+    $simg.fadeIn(4000,
+    function() {
+        s++;
+        if (s != imgCount) {
+            showspringimg();
+            if($simg.attr("alt")=="summer"){
+                 gosummer(); //转到summer
+            }
+            if($simg.attr("alt")=="winter"){
+                 goWinter(); //转到winter
+            }
+        }else{
+            $("#childspring").fadeOut(3000);
+            goAutumn();
+        }
+    });
+    $textimg.fadeOut(2000,
+    function() {
+        $textimg.html($simg.data('text'));
+        $textimg.fadeIn(2000);
+    });
+    $simg.prev("img").fadeOut(4000);
+}
+
+//冬操作
+showwinter=function showwinter(){
+   //
+}
+
+setcreateAutumn = function setcreateAutumn() {
+    createAutumn('img/autumn/', 160, "autumn", "png", 15);
+}
+setcreateSnow = function setcreateSnow() {
+    createSnow('img/snow/', 160, "snow", "gif", 5);
+}
+setcreateRose = function setcreateRose() {
+    createRose('img/rose/', 200, "rose", "png", 20);
+}
+//秋
+function goAutumn() {
+    removeSnow(3000);
+    $("#winter").fadeOut(3000, function() {
+    	setTimeout(setcreateAutumn, 0); //创建树叶	
+        setTimeout(showautumntext, 0); //显示autumn文字
+    });
+    
+}
+//冬
+function goWinter() {
+    $("#summer").fadeOut(3000, function() {
+         setTimeout(setcreateSnow, 0); //创建雪花
+         //do winter
+         setTimeout(showwinter,5000);
+	});
+}
+//夏
+function gosummer() {
+	$("#spring").fadeOut(3000, function() {
+		//do summer
+	});
+   
+}
+//love
+function golove() {
+    removeAutumn(3000);
+    $("#autumn").fadeOut(3000, function() {
+	 //setcreateRose();
+	 $(".toprose").fadeIn(3000);
+     $(".footrose").slideToggle(3000);
+     $("#rainmp3")[0].Stop();
+     $("#MyDestiny")[0].Play();
+     setTimeout(function(){
+     	 showlovetext();
+     },5000);
+});
+}
+var px="55px";
+var lovetime=100;
+function qumarry(){
+	$(".marrydiv").animate({fontSize: px},lovetime, function() {
+        if(px=="55px"){
+            px="60px";
+            lovetime=500;
+        }else{
+            px="55px";
+            lovetime=100;
+        }
+  	   	   qumarry();
+  	   	  	  });
+}
+showlovetext=function showlovetext (){
+  $(".lovediv").slideDown(13000, function() {
+  	   $(this).fadeOut(2000, function() {
+  	   	  $(".handrose").fadeIn(2000);
+  	   	  $(".marrydiv").fadeIn(2000);
+  	   	  setTimeout(function(){
+            $("#yes").fadeIn(1000);
+          },2000);
+
+  	   });
+  });
+}
+
+
+$(function() {
+    $("#MyDestiny")[0].Stop();
+    liCount = $(".textright ul li").size();
+    imgCount = $(".childdiv-spring img").size();
+
+    setTimeout(showspringimg, 1000); //显示spring图片
+
+    var dh = document.documentElement.clientHeight;
+    var dw = document.documentElement.clientWidth;
+
+
+
+    $(".imgdiv .bg").attr({
+        width: dw
+    });
+    $(".footrose").css({
+        width: dw
+    });
+
+
+    //扩展方法
+    $.go = function(id, option) {
+        var ds = {
+            time: 500
+        }
+        var de = $.extend({},
+        ds, option);
+        if (typeof id == 'undefined') return false;
+        var top = $("#" + id).offset().top;
+        $("body,html").animate({
+            scrollTop: top
+        },
+        de.time);
+    };
+
+    $("#yes").click(function(){
+        $(this).fadeOut(1);
+         setcreateRose();//创建玫瑰花
+         
+         $(".marrydiv").fadeOut(2000,function(){
+            $(".marrydiv").html("我们结婚啦!");
+            $(this).fadeIn(2000);
+         })
+         $(".handrose").fadeOut(1000);
+         $(".heartrosediv").fadeIn(2000);
+
+    });
+});
+	</script>
+</head>
+
+<body>
+    <div class="bgsoundrainmp3 bgsound">
+        <embed class="rainmp3" id="rainmp3" src="sound\Kiss The Rain.mp3" loop=3 height="0" width="0" />
+    </div>
+    <div class="bgsoundMyDestiny bgsound">
+        <embed class="MyDestiny" id="MyDestiny" src="sound\My Destiny.mp3" loop=3 height="0" width="0" />
+    </div>
+    <div id="imgt" class="imgt">
+        <!-- 春start -->
+        <div class="imgdiv springdiv" id="spring">
+            <img class="bg" src="img\spring.jpg" />
+        </div>
+         <div class="childdiv-spring" id="childspring">
+                <img src="img\xs\psb.jpg" data-text="第一次拥有你的照片" width="400px">
+                <img src="img\xs\birthday.jpg" data-text="还记得咱俩生日一起过的吗" width="400px">
+                <img src="img\xs\eat.jpg" data-text="吃货的样子" width="400px">
+                <img src="img\xs\changcheng.jpg" data-text="傻傻的二货" width="400px">
+                <img src="img\xs\shuai.jpg" data-text="帅气的样子" width="400px">
+                <img src="img\xs\ye.jpg" data-text="美美美美" width="400px">
+                <img src="img\xs\huainian.jpg" data-text="喜欢你得踏实,认真,努力" width="400px">
+
+                <img src="img\xs\psb(1).jpg" data-text="有你的日子不孤单" width="400px" alt="summer">
+                <img src="img\xs\hongtin.jpg" data-text="夏天的你依然显露出胖胖的样子" width="400px">
+                <img src="img\xs\summerj.jpg" data-text="操场边上的你也依旧美丽" width="400px">
+                <img src="img\xs\zipai.jpg" data-text="大大的眼睛" width="400px">
+                <img src="img\xs\err.jpg" data-text="第二次的香山之游,依然感觉没好" width="400px">
+                <img src="img\xs\er.jpg" data-text="情侣服饰也逐渐完善" width="400px">
+                <img src="img\xs\cai4.jpg" data-text="我喜欢吃你做的菜" width="400px">
+
+                <img src="img\xs\psb(3).jpg" data-text="有你的日子不孤单" width="400px" alt="winter">
+                <img src="img\xs\yang.jpg" data-text="冬日阳光下的你" width="400px">
+                <img src="img\xs\tong.jpg" data-text="还记得冬天的南锣鼓巷吗?" width="400px">
+                <img src="img\xs\lovet.jpg" data-text="也许一生只能重复写这几个词" width="400px">
+                <img src="img\xs\t.jpg" data-text="还是喜欢中文的" width="400px">
+                <img src="img\xs\psb(3).jpg" data-text="冻得傻傻的样子" width="400px">
+                <img src="img\xs\psb(2).jpg" data-text="调皮的你" width="400px">
+                <img src="img\xs\psb(4).jpg" data-text="露出本性" width="400px">
+                <img src="img\xs\dong.jpg" data-text="还记得那次坑爹的自助吗?" width="400px">
+                 <img src="img\xs\xiaohai.jpg" data-text="小孩子" width="400px"> 
+                <img src="img\xs\snow1.jpg" data-text="第一次滑雪" width="400px">
+                <img src="img\xs\bing.jpg" data-text="好多第一次,这次是冰" width="400px">
+                <div class="textdiv" id="imgtext"></div>
+            </div>
+        <!-- 春end -->
+        <!-- 夏start -->
+        <div class="imgdiv summerdiv" id="summer"><img class="bg" src="img\summer.jpg" /></div>
+        <!-- 夏end -->
+        <!-- 秋start -->
+        <div class="imgdiv autumndiv" id="autumn">
+            <img class="bg" src="img\autumn.jpg" />
+            <div class="textright">
+                    <ul>
+                        <li>看你开心的笑就是我最开心的事</li>
+                        <li>无论现在、过去、未来</li>
+                         <li>我都会向现在一样</li>
+                        <li>以后不论遇到任何困难</li>
+                        <li>我都不会丢下你一个人</li>
+                        <li>跟你在一起的这段日子里</li>
+                        <li>深深感受到，什么叫做幸福</li>
+                        <li>什么叫做依赖，经历了那么多</li>
+                        <li>我才知道你是我最爱的女人</li>
+                    </ul>
+                </div>
+        </div>
+        <!-- 秋end-->
+        <!-- 冬start -->
+        <div class="imgdiv winterdiv" id="winter"><img class="bg" src="img\winter.jpg" /></div>
+        <!-- 冬end -->
+        <div class="lovediv imgdiv" id="love">
+            你高兴的时候，我陪你，
+            你伤心的时候，我陪你，
+            你哭泣的时候，我陪你，
+            无论怎样，我都陪着你，
+            只因为你是我最爱的人。
+            我将永远陪伴你！
+        </div>
+        <div class="marrydiv">亲爱的，嫁给我，好吗?</div>
+    </div>
+    <div class="footrose"></div>
+    <div class="rightrose toprose">
+    	 <img src="img/rightrose.png" alt="" width="200px">
+    </div>
+    <div class="leftrose toprose">
+    	<img src="img/leftrose.png" alt="" width="200px">
+    </div>
+    <div class="handrose" id="handrose">
+    	<img src="img/handrose.png" width="120px"  />
+    </div>
+    <div class="answerdiv" id="yes">我愿意</div>
+    <div class="heartrosediv">
+    <span>我爱你</span>
+        <img src="img/to.jpg" width="470px">
+    </div>
+</body>
+
+
+</html>
