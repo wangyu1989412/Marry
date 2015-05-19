@@ -1,0 +1,28 @@
+body{margin: 0px;padding: 0px;background:#ffdcda}
+.bgsound{position:fixed}
+.imgdiv{position: absolute;left: 0px;top: 0px;}
+.springdiv{z-index:6;}
+.summerdiv{z-index:5;}
+.autumndiv{z-index:3;}
+.winterdiv{z-index:4;}
+.lovediv{display: none;text-align: center;z-index:9;color: red;font-size: 45px;font-family:"KaiTi";position: fixed;left: 50%;top:10px;width: 510px;height: 400px;margin-left: -255px;}
+.imgt{width: auto;height: auto;}
+.childdiv-spring{position: fixed;left: 50%;top:50px;width: 700px;height: 700px;z-index: 10;margin-left: -350px;}
+.childdiv-spring img{display: none;box-shadow:0px 0px 12px black;border-radius: 6px;position: absolute;left: 50%;top: 0px;margin-left:-200px; }
+.textdiv{font-size:36px;color: #16B4F6 ;font-weight: bold;display: none;position: absolute;width:600px;height: 100px;margin-left: -300px;left: 50%;top: 550px;text-align: center;line-height: 100px;}
+.textright{position: absolute;right: 0px;top:5px;}
+ul{width:800px;height:700px;overflow:hidden;list-style:none;margin-right: 4px;color:#FCFF00;text-shadow:0px 0px 12px red;} 
+ul li{float:right;display:inline;margin-right:20px;width:42px;height:700px;font-size:42px;word-wrap:break-word;word-break:nomal;display: none;}
+.footrose{position: fixed;left: 0px;bottom: 0px;height: 168px;background: url(../img/footrose.png);z-index: 7;display: none;}
+.leftrose{left: 0px;} 
+.rightrose{right: 0px;} 
+.toprose{position: fixed;top: 0px;width: 200px;height: 300px;z-index: 7;display: none;}
+.handrose{position: fixed;left: 50%;top: 50px;width: 120px;height: 189px;z-index: 8;display: none;margin-left: -60px;text-align: center;}
+.marrydiv{display: none;text-align: center;z-index:9;color: red;font-size: 60px;font-family:"KaiTi";position: fixed;left: 50%;top:450px;width:650px;height: 100px;margin-left: -325px;}
+.lovegif{z-index:9;position: fixed;left: 50%;height: 92px;width: 104px;top:10px;margin-left: -52px;display: none;}
+.answerdiv{display: none;position: fixed;z-index: 11;width: 130px;height: 70px;background: #F30A93;box-shadow:0px 0px 12px black;border-radius: 6px;text-align: center;line-height: 70px;cursor: pointer;font-size: 34px;color: #0D89C7}
+.heartrosediv{position: fixed;z-index: 10;width: 500px;height: 443px;text-align:center;left: 50%;margin-left: -250px;top: 0px;display: none;}
+.heartrosediv img{position: absolute;z-index: 13;left: 50%;margin-left: -235px;}
+.heartrosediv span{position: absolute;z-index: 14;margin-top: 180px;left: 50%;margin-left: -105px;color: red;font-size:70px;font-family: "KaiTi";}
+#yes{right:100px;top: 450px;}
+#no{left:100px;top: 450px;}
